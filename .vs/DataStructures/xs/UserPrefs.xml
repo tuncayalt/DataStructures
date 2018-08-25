@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{C12601DA-1944-4AD2-A023-CEDE141F9BDC}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataStructuresTests/StackTests/StackWithLinkedListTests.cs">
+    <Files>
+      <File FileName="DataStructuresLibrary/Stacks/StackWithArray.cs" Line="31" Column="10" />
+      <File FileName="DataStructuresLibrary/Stacks/StackWithLinkedList.cs" Line="78" Column="14" />
+      <File FileName="DataStructuresTests/StackTests/StackWithArrayTests.cs" Line="133" Column="1" />
+      <File FileName="DataStructuresTests/StackTests/StackWithLinkedListTests.cs" Line="112" Column="41" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.DataStructuresTests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>
