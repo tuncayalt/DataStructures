@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Stacks\" />
+    <Folder Include="Queues\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="StackWithArray.cs" />

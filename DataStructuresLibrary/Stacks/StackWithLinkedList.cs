@@ -18,20 +18,33 @@ namespace DataStructuresLibrary.Stacks
 
         Node<T> current;
 
+        /// <summary>
+        /// Non bounded stack
+        /// </summary>
         public StackWithLinkedList()
         {
-            _capacity = 100;
+            _capacity = int.MaxValue;
             _size = 0;
             current = null;
         }
+
+        /// <summary>
+        /// Bounded stack
+        /// </summary>
+        /// <param name="capacity">Capacity.</param>
         public StackWithLinkedList(int capacity)
         {
+            if (capacity <= 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
             _capacity = capacity;
             _size = 0;
             current = null;
         }
 
-        public int GetCapacity()
+        public int GetMaxCapacity()
         {
             return _capacity;
         }
@@ -54,7 +67,7 @@ namespace DataStructuresLibrary.Stacks
         public T Peek()
         {
             if (IsEmpty()){
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The stack is empty");
             }
             return current._data;
         }
@@ -63,7 +76,7 @@ namespace DataStructuresLibrary.Stacks
         {
             if (IsEmpty())
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The stack is empty");
             }
             T result = current._data;
             current = current._next;
@@ -74,7 +87,7 @@ namespace DataStructuresLibrary.Stacks
         public void Push(T newValue)
         {
             if (IsFull()){
-                throw new StackOverflowException();
+                throw new InvalidOperationException("The stack is full");
             }
             Node<T> newNode = new Node<T>(newValue);
             newNode._next = current;

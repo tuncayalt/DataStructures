@@ -3,26 +3,41 @@ namespace DataStructuresLibrary.Stacks
 {
     public class StackWithArray<T> : IStack<T>
     {
-        private readonly int _capacity;
-        private readonly T[] _arr;
+        private int _capacity;
+        private T[] _arr;
         private int _size;
+        private readonly bool _bounded;
 
+        /// <summary>
+        /// Bounded stack
+        /// </summary>
+        /// <param name="capacity">Capacity.</param>
         public StackWithArray(int capacity)
         {
+            if (capacity <= 0){
+                throw new ArgumentOutOfRangeException();
+            }
+                
             _capacity = capacity;
             _size = 0;
             _arr = new T[_capacity];
+            _bounded = true;
         }
+
+        /// <summary>
+        /// Non bounded stack
+        /// </summary>
         public StackWithArray()
         {
             _capacity = 100;
             _size = 0;
-            _arr = new T[_capacity]; 
+            _arr = new T[_capacity];
+            _bounded = false;
         }
 
-        public int GetCapacity()
+        public int GetMaxCapacity()
         {
-            return _capacity;
+            return _bounded ? _capacity : int.MaxValue;
         }
 
         public int GetCurrentSize()
@@ -37,13 +52,13 @@ namespace DataStructuresLibrary.Stacks
 
         public bool IsFull()
         {
-            return _size == _capacity;
+            return _size == GetMaxCapacity();
         }
 
         public T Peek()
         {
             if (IsEmpty()){
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The stack is empty");
             }
             return _arr[_size - 1];
         }
@@ -52,7 +67,7 @@ namespace DataStructuresLibrary.Stacks
         {
             if (IsEmpty())
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The stack is empty");
             }
             T result = _arr[_size - 1];
             _arr[--_size] = default(T);
@@ -62,7 +77,11 @@ namespace DataStructuresLibrary.Stacks
         public void Push(T newValue)
         {
             if (IsFull()){
-                throw new StackOverflowException();
+                throw new InvalidOperationException("The stack is full");
+            }
+            if (_size >= _capacity){
+                Array.Resize(ref _arr, _capacity * 2);
+                _capacity *= 2;
             }
             _arr[_size] = newValue;
             _size++;

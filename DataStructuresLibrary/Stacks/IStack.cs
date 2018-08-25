@@ -8,7 +8,7 @@ namespace DataStructuresLibrary.Stacks
         void Push(T newValue);
         T Peek();
         T Pop();
-        int GetCapacity();
+        int GetMaxCapacity();
         int GetCurrentSize();
     }
 }

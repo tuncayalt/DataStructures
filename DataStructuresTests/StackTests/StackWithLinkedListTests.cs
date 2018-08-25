@@ -15,6 +15,23 @@ namespace DataStructuresTests.StackTests
             st = new StackWithLinkedList<int>();
         }
 
+        [TestMethod]
+        public void StackWithLinkedList_Constructor_should_throw_exception_when_capacity_is_zero()
+        {
+            try
+            {
+                StackWithLinkedList<int> st2 = new StackWithLinkedList<int>(0);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
 
         [TestMethod]
         public void StackWithLinkedList_IsEmpty_should_return_true_when_stack_is_empty()
@@ -63,9 +80,9 @@ namespace DataStructuresTests.StackTests
                 st.Peek();
                 Assert.Fail();
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                Assert.IsTrue(true);
+                Assert.AreEqual("The stack is empty", ex.Message);
             }
             catch (Exception)
             {
@@ -90,9 +107,9 @@ namespace DataStructuresTests.StackTests
                 st.Pop();
                 Assert.Fail();
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                Assert.IsTrue(true);
+                Assert.AreEqual("The stack is empty", ex.Message);
             }
             catch (Exception)
             {
@@ -120,14 +137,32 @@ namespace DataStructuresTests.StackTests
                 st2.Push(4);
                 Assert.Fail();
             }
-            catch (StackOverflowException)
+            catch (InvalidOperationException ex)
             {
-                Assert.IsTrue(true);
+                Assert.AreEqual("The stack is full", ex.Message);
             }
             catch (Exception)
             {
                 Assert.Fail();
             }
+        }
+
+        [TestMethod]
+        public void StackWithLinkedList_Push_should_increase_size_when_stack_is_available()
+        {
+            st.Push(1);
+            st.Push(3);
+            Assert.AreEqual(2, st.GetCurrentSize());
+        }
+
+        [TestMethod]
+        public void StackWithLinkedList_many_Push_should_increase_size_when_stack_is_available()
+        {
+            for (int i = 0; i < 150; i++)
+            {
+                st.Push(2);
+            }
+            Assert.AreEqual(150, st.GetCurrentSize());
         }
     }
 }
