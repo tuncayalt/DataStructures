@@ -3,9 +3,9 @@ namespace DataStructuresLibrary.Queues
 {
     public class QueueWithArray<T> : IQueue<T>
     {
-        private readonly int _capacity;
+        private int _capacity;
         private int _size;
-        private readonly T[] _arr;
+        private T[] _arr;
         private readonly bool _bounded;
 
         /// <summary>
@@ -25,6 +25,10 @@ namespace DataStructuresLibrary.Queues
         /// <param name="capacity">Capacity.</param>
         public QueueWithArray(int capacity)
         {
+            if (capacity <= 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
             _capacity = capacity;
             _size = 0;
             _arr = new T[_capacity];
@@ -54,7 +58,7 @@ namespace DataStructuresLibrary.Queues
         public T Peek()
         {
             if (IsEmpty()){
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The queue is empty");
             }
             return _arr[0];
         }
@@ -62,7 +66,7 @@ namespace DataStructuresLibrary.Queues
         {
             if (IsEmpty())
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The queue is empty");
             }
             T result = _arr[0];
             
@@ -78,9 +82,13 @@ namespace DataStructuresLibrary.Queues
             if (IsFull()){
                 throw new InvalidOperationException("The queue is full");
             }
+            if (_size == _capacity){
+                long tempCap = _capacity * 2;
+                _capacity = Convert.ToInt32(Math.Min(tempCap, int.MaxValue));
+                Array.Resize(ref _arr, _capacity);
+            }
+            _arr[_size] = newValue;
+            _size++;
         }
-
-
-
     }
 }

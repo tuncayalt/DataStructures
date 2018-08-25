@@ -80,8 +80,9 @@ namespace DataStructuresLibrary.Stacks
                 throw new InvalidOperationException("The stack is full");
             }
             if (_size >= _capacity){
-                Array.Resize(ref _arr, _capacity * 2);
-                _capacity *= 2;
+                long tempCap = _capacity * 2;
+                _capacity = Convert.ToInt32(Math.Min(tempCap, int.MaxValue));
+                Array.Resize(ref _arr, _capacity);
             }
             _arr[_size] = newValue;
             _size++;
