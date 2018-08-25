@@ -10,7 +10,7 @@ namespace DataStructuresTests.StackTests
         StackWithLinkedList<int> st;
 
         [TestInitialize]
-        public void setUp()
+        public void SetUp()
         {
             st = new StackWithLinkedList<int>();
         }

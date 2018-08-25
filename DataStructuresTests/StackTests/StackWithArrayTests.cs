@@ -1,5 +1,4 @@
 ﻿using System;
-using DataStructuresLibrary;
 using DataStructuresLibrary.Stacks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,7 +10,7 @@ namespace DataStructuresTests.StackTests
         StackWithArray<int> st;
 
         [TestInitialize]
-        public void setUp(){
+        public void SetUp(){
             st = new StackWithArray<int>();
         }
 
