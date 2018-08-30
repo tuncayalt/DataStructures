@@ -29,7 +29,7 @@ namespace DataStructuresLibrary.Stacks
         /// </summary>
         public StackWithArray()
         {
-            _capacity = 100;
+            _capacity = 16;
             _size = 0;
             _arr = new T[_capacity];
             _bounded = false;
