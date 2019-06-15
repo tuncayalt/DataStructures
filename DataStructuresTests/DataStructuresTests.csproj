@@ -15,7 +15,6 @@
   <ItemGroup>
     <Folder Include="StackTests\" />
     <Folder Include="QueueTests\" />
-    <Folder Include="ListTests\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataStructuresLibrary\DataStructuresLibrary.csproj" />

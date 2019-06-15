@@ -4,7 +4,6 @@ namespace DataStructuresLibrary.Lists
     public interface IList<T>
     {
         bool IsEmpty();
-        bool IsFull();
         int GetMaxCapacity();
         int Count();
         void Add(T newElement);

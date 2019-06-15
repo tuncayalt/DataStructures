@@ -7,10 +7,8 @@
   <ItemGroup>
     <Folder Include="Stacks\" />
     <Folder Include="Queues\" />
-    <Folder Include="Lists\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="StackWithArray.cs" />
-    <Compile Remove="Lists\LinkedList.cs" />
   </ItemGroup>
 </Project>

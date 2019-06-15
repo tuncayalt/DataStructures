@@ -47,31 +47,6 @@ namespace DataStructuresTests.ListTests
         }
 
         [TestMethod]
-        public void List_IsFull_should_return_false_when_list_is_empty()
-        {
-            Assert.AreEqual(false, li.IsFull());
-        }
-
-        [TestMethod]
-        public void List_IsFull_should_return_false_when_list_has_less_elements()
-        {
-            List<int> li2 = new List<int>(2);
-            li2.Add(1);
-
-            Assert.AreEqual(false, li2.IsFull());
-        }
-
-        [TestMethod]
-        public void List_IsFull_should_return_true_when_list_has_capacity_number_of_elements()
-        {
-            List<int> li2 = new List<int>(2);
-            li2.Add(1);
-            li2.Add(3);
-
-            Assert.AreEqual(true, li2.IsFull());
-        }
-
-        [TestMethod]
         public void List_Remove_should_throw_exception_when_list_is_empty()
         {
             try
@@ -172,27 +147,6 @@ namespace DataStructuresTests.ListTests
         }
 
         [TestMethod]
-        public void List_Add_should_throw_exception_when_list_is_full()
-        {
-            List<int> li2 = new List<int>(2);
-            li2.Add(2);
-            li2.Add(4);
-            try
-            {
-                li2.Add(3);
-                Assert.Fail();
-            }
-            catch (InvalidOperationException ex)
-            {
-                Assert.AreEqual("The list is full", ex.Message);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
-
-        [TestMethod]
         public void List_add_should_increase_list_size_by_1()
         {
             li.Add(1);
@@ -227,6 +181,37 @@ namespace DataStructuresTests.ListTests
             Assert.AreEqual(true, li.Find(3));
             Assert.AreEqual(true, li.Find(4));
             Assert.AreEqual(false, li.Find(5));
+        }
+
+        [TestMethod]
+        public void List_Remove_should_not_remove_elements_out_of_size()
+        {
+            li.Add(1);
+            li.Add(2);
+
+            li.Remove(0);
+
+            Assert.AreEqual(2, li.Count());
+        }
+
+        [TestMethod]
+        public void List_Add_Remove_multiple_records_should_be_successful()
+        {
+            try
+            {
+                for (var i = 0; i < 150; i++)
+                {
+                    li.Add(i);
+                }
+                for (var i = 0; i < 150; i++)
+                {
+                    li.Remove(i);
+                }
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail();
+            }
         }
     }
 }

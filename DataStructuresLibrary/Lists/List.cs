@@ -4,28 +4,22 @@ namespace DataStructuresLibrary.Lists
     public class List<T> : IList<T>
     {
         private T[] _arr;
-        private readonly bool _bounded;
-        private int _capacity;
         private int _size;
 
         public List()
         {
-            _capacity = 16;
             _size = 0;
-            _arr = new T[_capacity];
-            _bounded = false;
+            _arr = new T[16];
         }
 
-        public List(int capacity)
+        public List(int initialLength)
         {
-            if (capacity <= 0)
+            if (initialLength <= 0)
             {
                 throw new ArgumentOutOfRangeException();
             }
-            _capacity = capacity;
             _size = 0;
-            _arr = new T[_capacity];
-            _bounded = true;
+            _arr = new T[initialLength];
         }
 
         public void Add(T newElement)
@@ -34,11 +28,11 @@ namespace DataStructuresLibrary.Lists
             {
                 throw new InvalidOperationException("The list is full");
             }
-            if (_size == _capacity)
+            if (_size == _arr.Length)
             {
-                long temp = _capacity * 2;
-                _capacity = Convert.ToInt32(Math.Min(temp, int.MaxValue));
-                Array.Resize(ref _arr, _capacity);
+                long temp = _arr.Length * 2;
+                var capacity = Convert.ToInt32(Math.Min(temp, int.MaxValue));
+                Array.Resize(ref _arr, capacity);
             }
             _arr[_size] = newElement;
             _size++;
@@ -72,7 +66,7 @@ namespace DataStructuresLibrary.Lists
 
         public int GetMaxCapacity()
         {
-            return _bounded ? _capacity : int.MaxValue;
+            return int.MaxValue;
         }
 
         public bool IsEmpty()
@@ -80,7 +74,7 @@ namespace DataStructuresLibrary.Lists
             return _size == 0;
         }
 
-        public bool IsFull()
+        private bool IsFull()
         {
             return _size == GetMaxCapacity();
         }
@@ -91,19 +85,22 @@ namespace DataStructuresLibrary.Lists
             {
                 throw new InvalidOperationException("The list is empty");
             }
-            bool found = false;
-            for (int i = 0; i < _arr.Length; i++)
+
+            var found = false;
+            for (var i = 0; i < _size; i++)
             {
                 if (_arr[i].Equals(element))
                 {
                     found = true;
                     _size--;
                 }
-                if (found && i < _arr.Length - 1)
+                if (found && i < _size)
                 {
                     _arr[i] = _arr[i + 1];
                 }
             }
+
+            DecreaseArrayLength();
         }
 
         public void RemoveAt(int index)
@@ -116,11 +113,21 @@ namespace DataStructuresLibrary.Lists
             {
                 throw new IndexOutOfRangeException();
             }
-            for (int i = index; i < _arr.Length - 1; i++)
+            for (int i = index; i < _size; i++)
             {
                 _arr[i] = _arr[i + 1];
             }
             _size--;
+
+            DecreaseArrayLength();
+        }
+
+        private void DecreaseArrayLength()
+        {
+            if (_size * 4 < _arr.Length && _arr.Length > 16)
+            {
+                Array.Resize(ref _arr, Math.Max(16, _arr.Length / 2));
+            }
         }
     }
 }
