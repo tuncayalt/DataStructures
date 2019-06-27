@@ -35,7 +35,17 @@ namespace DataStructuresLibrary.Lists
 
         public bool Find(T element)
         {
-            throw new System.NotImplementedException();
+            var curr = _head;
+            while(curr != null)
+            {
+                if (curr.data.Equals(element))
+                {
+                    return true;
+                }
+                curr = curr.next;
+            }
+
+            return false;
         }
 
         public T Get(int index)
@@ -66,12 +76,95 @@ namespace DataStructuresLibrary.Lists
 
         public void Remove(T element)
         {
-            throw new System.NotImplementedException();
+            var curr = _head;
+
+            while (curr != null)
+            {
+                if (curr.data.Equals(element))
+                {
+                    RemoveNode(curr);
+                }
+                curr = curr.next;
+            }
+        }
+
+        private void RemoveNode(Node<T> node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            if (node.prev == null && node.next == null)
+            {
+                _head = null;
+                _tail = null;
+            }
+            else if (node.prev == null)
+            {
+                _head = node.next;
+                node.next.prev = node.prev;
+            }
+            else if (node.next == null)
+            {
+                _tail = node.prev;
+                node.prev.next = node.next;
+            }
+            else
+            {
+                node.prev.next = node.next;
+                node.next.prev = node.prev;
+            }
+
+            _size--;
+            node = null;
         }
 
         public void RemoveAt(int index)
         {
-            throw new System.NotImplementedException();
+            if (index < 0 || index >= _size)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            var forward = false;
+
+            if (index <= _size / 2)
+            {
+                forward = true;
+            }
+
+            if (forward)
+            {
+                RemoveAtForward(index);
+            }
+            else
+            {
+                RemoveAtBackward(index);
+            }
+        }
+
+        private void RemoveAtBackward(int index)
+        {
+            var curr = _tail;
+
+            for (var i = _size - 1; i > index; i--)
+            {
+                curr = curr.prev;
+            }
+
+            RemoveNode(curr);
+        }
+
+        private void RemoveAtForward(int index)
+        {
+            var curr = _head;
+
+            for (var i = 0; i < index; i++)
+            {
+                curr = curr.next;
+            }
+
+            RemoveNode(curr);
         }
     }
 }

@@ -69,11 +69,11 @@ namespace DataStructuresTests.ListTests
                 _ll.Get(0);
                 Assert.Fail();
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentOutOfRangeException)
             {
-
+                Assert.IsTrue(true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -90,11 +90,11 @@ namespace DataStructuresTests.ListTests
                 _ll.Get(2);
                 Assert.Fail();
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentOutOfRangeException)
             {
-
+                Assert.IsTrue(true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -109,6 +109,164 @@ namespace DataStructuresTests.ListTests
             Assert.AreEqual(1, _ll.Get(0));
             Assert.AreEqual(2, _ll.Get(1));
             Assert.AreEqual(3, _ll.Get(2));
+        }
+
+        [TestMethod]
+        public void LinkedList_Find_ListEmpty_ReturnsFalse()
+        {
+            var exists = _ll.Find(1);
+
+            Assert.IsFalse(exists);
+        }
+
+        [TestMethod]
+        public void LinkedList_Find_ElementNotExists_ReturnsFalse()
+        {
+            _ll.Add(2);
+            var exists = _ll.Find(1);
+
+            Assert.IsFalse(exists);
+        }
+
+        [TestMethod]
+        public void LinkedList_Find_ElementExists_ReturnsTrue()
+        {
+            _ll.Add(1);
+            _ll.Add(2);
+
+            Assert.IsTrue(_ll.Find(1));
+            Assert.IsTrue(_ll.Find(2));
+        }
+
+        [TestMethod]
+        public void LinkedList_Remove_ListEmpty_NoChange()
+        {
+            _ll.Remove(1);
+
+            Assert.IsTrue(_ll.IsEmpty());
+        }
+
+        [TestMethod]
+        public void LinkedList_Remove_ElementNotExist_CountStaysSame()
+        {
+            _ll.Add(1);
+
+            _ll.Remove(2);
+            Assert.AreEqual(1, _ll.Count());
+
+            _ll.Remove(3);
+            Assert.AreEqual(1, _ll.Count());
+        }
+
+        [TestMethod]
+        public void LinkedList_Remove_ElementExists_CountDecreasesBy1()
+        {
+            _ll.Add(1);
+            _ll.Add(2);
+            _ll.Add(3);
+
+            _ll.Remove(2);
+            Assert.AreEqual(2, _ll.Count());
+            _ll.Remove(1);
+            Assert.AreEqual(1, _ll.Count());
+            _ll.Remove(3);
+            Assert.AreEqual(0, _ll.Count());
+        }
+
+        [TestMethod]
+        public void LinkedList_RemoveAt_ListEmpty_ThrowsArgumentOutOfRangeException()
+        {
+            try
+            {
+                _ll.RemoveAt(0);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void LinkedList_RemoveAt_IndexTooSmall_ThrowsArgumentOutOfRangeException()
+        {
+            try
+            {
+                _ll.Add(1);
+                _ll.RemoveAt(-1);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void LinkedList_RemoveAt_IndexEqualToSize_ThrowsArgumentOutOfRangeException()
+        {
+            try
+            {
+                _ll.Add(1);
+                _ll.RemoveAt(1);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void LinkedList_RemoveAt_IndexGreaterThanSize_ThrowsArgumentOutOfRangeException()
+        {
+            try
+            {
+                _ll.Add(1);
+                _ll.RemoveAt(2);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void LinkedList_RemoveAt_IndexInList_CountDecreasesByOne()
+        {
+            _ll.Add(1);
+            _ll.Add(2);
+            _ll.Add(3);
+            _ll.RemoveAt(2);
+            Assert.AreEqual(2, _ll.Count());
+            Assert.IsFalse(_ll.Find(3));
+
+            _ll.Add(4);
+            _ll.RemoveAt(0);
+            Assert.AreEqual(2, _ll.Count());
+            Assert.IsFalse(_ll.Find(1));
+
+            _ll.Add(5);
+            _ll.RemoveAt(1);
+            Assert.AreEqual(2, _ll.Count());
+            Assert.IsFalse(_ll.Find(4));
         }
     }
 }

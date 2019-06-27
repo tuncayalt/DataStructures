@@ -208,7 +208,7 @@ namespace DataStructuresTests.ListTests
                     li.Remove(i);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Assert.Fail();
             }
