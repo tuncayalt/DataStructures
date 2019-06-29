@@ -170,6 +170,29 @@ namespace DataStructuresTests.ListTests
         }
 
         [TestMethod]
+        public void List_AddFirst_should_increase_list_size_by_1()
+        {
+            li.AddFirst(1);
+            Assert.AreEqual(1, li.Count());
+            Assert.AreEqual(1, li.Get(0));
+        }
+
+        [TestMethod]
+        public void List_many_AddFirsts_should_increase_list_size()
+        {
+            for (int i = 1; i < 150; i++)
+            {
+                li.AddFirst(i);
+            }
+
+            Assert.AreEqual(149, li.Count());
+            for (int i = 1; i < 150; i++)
+            {
+                Assert.AreEqual(i, li.Get(149 - i));
+            }
+        }
+
+        [TestMethod]
         public void List_find_should_return_true_when_element_in_list()
         {
             li.Add(2);
@@ -212,6 +235,33 @@ namespace DataStructuresTests.ListTests
             {
                 Assert.Fail();
             }
+        }
+
+        [TestMethod]
+        public void LinkedList_FindIndex_ListEmpty_ReturnsMinusOne()
+        {
+            var index = li.FindFirstIndex(1);
+
+            Assert.AreEqual(-1, index);
+        }
+
+        [TestMethod]
+        public void LinkedList_FindIndex_ElementNotExists_ReturnsMinusOne()
+        {
+            li.Add(2);
+            var index = li.FindFirstIndex(1);
+
+            Assert.AreEqual(-1, index);
+        }
+
+        [TestMethod]
+        public void LinkedList_FindIndex_ElementExists_ReturnsIndex()
+        {
+            li.Add(1);
+            li.Add(2);
+
+            Assert.AreEqual(0, li.FindFirstIndex(1));
+            Assert.AreEqual(1, li.FindFirstIndex(2));
         }
     }
 }

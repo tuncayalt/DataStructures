@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DataStructuresLibrary.Lists
 {
@@ -23,6 +25,26 @@ namespace DataStructuresLibrary.Lists
                 };
                 _tail.next = temp;
                 _tail = temp;
+            }
+
+            _size++;
+        }
+
+        public void AddFirst(T newElement)
+        {
+            if (IsEmpty())
+            {
+                _tail = new Node<T>(newElement);
+                _head = _tail;
+            }
+            else
+            {
+                var temp = new Node<T>(newElement)
+                {
+                    next = _head
+                };
+                _head.prev = temp;
+                _head = temp;
             }
 
             _size++;
@@ -165,6 +187,55 @@ namespace DataStructuresLibrary.Lists
             }
 
             RemoveNode(curr);
+        }
+
+        public int FindFirstIndex(T element)
+        {
+            var curr = _head;
+            var index = 0;
+            while (curr != null)
+            {
+                if (curr.data.Equals(element))
+                {
+                    return index;
+                }
+                curr = curr.next;
+                index++;
+            }
+
+            return -1;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var curr = _head;
+            while (curr != null)
+            {
+                yield return curr.data;
+                curr = curr.next;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public int FindFirstIndex(Func<T, bool> predicate)
+        {
+            var curr = _head;
+            var index = 0;
+            while (curr != null)
+            {
+                if (predicate(curr.data))
+                {
+                    return index;
+                }
+                curr = curr.next;
+                index++;
+            }
+
+            return -1;
         }
     }
 }

@@ -46,19 +46,27 @@ namespace DataStructuresTests.ListTests
         }
 
         [TestMethod]
-        public void LinkedList_Add_AddedToEmptyLinkedList_Count1()
-        {
-            _ll.Add(1);
-            Assert.AreEqual(1, _ll.Count());
-        }
-
-        [TestMethod]
         public void LinkedList_Add_AddedToLinkedList_CountIncreases()
         {
             _ll.Add(1);
-            _ll.Add(1);
-            _ll.Add(1);
+            _ll.Add(2);
+            _ll.Add(3);
             Assert.AreEqual(3, _ll.Count());
+            Assert.AreEqual(1, _ll.Get(0));
+            Assert.AreEqual(2, _ll.Get(1));
+            Assert.AreEqual(3, _ll.Get(2));
+        }
+
+        [TestMethod]
+        public void LinkedList_AddFirst_AddedToLinkedList_CountIncreases()
+        {
+            _ll.AddFirst(1);
+            _ll.AddFirst(2);
+            _ll.AddFirst(3);
+            Assert.AreEqual(3, _ll.Count());
+            Assert.AreEqual(3, _ll.Get(0));
+            Assert.AreEqual(2, _ll.Get(1));
+            Assert.AreEqual(1, _ll.Get(2));
         }
 
         [TestMethod]
@@ -267,6 +275,33 @@ namespace DataStructuresTests.ListTests
             _ll.RemoveAt(1);
             Assert.AreEqual(2, _ll.Count());
             Assert.IsFalse(_ll.Find(4));
+        }
+
+        [TestMethod]
+        public void LinkedList_FindIndex_ListEmpty_ReturnsMinusOne()
+        {
+            var index = _ll.FindFirstIndex(1);
+
+            Assert.AreEqual(-1, index);
+        }
+
+        [TestMethod]
+        public void LinkedList_FindIndex_ElementNotExists_ReturnsMinusOne()
+        {
+            _ll.Add(2);
+            var index = _ll.FindFirstIndex(1);
+
+            Assert.AreEqual(-1, index);
+        }
+
+        [TestMethod]
+        public void LinkedList_FindIndex_ElementExists_ReturnsIndex()
+        {
+            _ll.Add(1);
+            _ll.Add(2);
+
+            Assert.AreEqual(0, _ll.FindFirstIndex(1));
+            Assert.AreEqual(1, _ll.FindFirstIndex(2));
         }
     }
 }

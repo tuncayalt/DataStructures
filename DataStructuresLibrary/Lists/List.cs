@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
 namespace DataStructuresLibrary.Lists
 {
     public class List<T> : IList<T>
@@ -35,6 +38,26 @@ namespace DataStructuresLibrary.Lists
                 Array.Resize(ref _arr, capacity);
             }
             _arr[_size] = newElement;
+            _size++;
+        }
+
+        public void AddFirst(T newElement)
+        {
+            if (IsFull())
+            {
+                throw new InvalidOperationException("The list is full");
+            }
+            if (_size == _arr.Length)
+            {
+                long temp = _arr.Length * 2;
+                var capacity = Convert.ToInt32(Math.Min(temp, int.MaxValue));
+                Array.Resize(ref _arr, capacity);
+            }
+            for (var i = _size - 1; i >= 0; i--)
+            {
+                _arr[i + 1] = _arr[i];
+            }
+            _arr[0] = newElement;
             _size++;
         }
 
@@ -128,6 +151,43 @@ namespace DataStructuresLibrary.Lists
             {
                 Array.Resize(ref _arr, Math.Max(16, _arr.Length / 2));
             }
+        }
+
+        public int FindFirstIndex(T element)
+        {
+            for (int i = 0; i < _arr.Length; i++)
+            {
+                if (_arr[i].Equals(element))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach(var item in _arr)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public int FindFirstIndex(Func<T, bool> predicate)
+        {
+            for (int i = 0; i < _arr.Length; i++)
+            {
+                if (predicate(_arr[i]))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }
