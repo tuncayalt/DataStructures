@@ -1,11 +1,18 @@
 # DataStructures
 
-My implementations of various generic data structures.
+My implementations of various generic data structures. I am implementing them with TDD. The ones that are already implemented are:
 
-1. Stack implementations
-- StackWithArray
-- StackWithLinkedList
+1. List implementations
+- List with array
+- Linked list
 
-2. Queue implementations
-- QueueWithArray
-- QueueWithLinkedList
+2. Stack implementations
+- Stack with array
+- Stack with linked list
+
+3. Queue implementations
+- Queue with array
+- Queue with linked list
+
+4. HashTable implementations
+- HashTable with array and linked list
