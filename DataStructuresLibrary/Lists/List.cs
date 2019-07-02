@@ -178,7 +178,7 @@ namespace DataStructuresLibrary.Lists
             return GetEnumerator();
         }
 
-        public int FindFirstIndex(Func<T, bool> predicate)
+        public int FindFirstIndex(Predicate<T> predicate)
         {
             for (int i = 0; i < _arr.Length; i++)
             {
@@ -187,6 +187,7 @@ namespace DataStructuresLibrary.Lists
                     return i;
                 }
             }
+
             return -1;
         }
     }

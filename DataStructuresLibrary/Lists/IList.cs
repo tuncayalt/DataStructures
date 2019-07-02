@@ -15,6 +15,6 @@ namespace DataStructuresLibrary.Lists
         T Get(int index);
         bool Find(T element);
         int FindFirstIndex(T element);
-        int FindFirstIndex(Func<T, bool> predicate);
+        int FindFirstIndex(Predicate<T> predicate);
     }
 }

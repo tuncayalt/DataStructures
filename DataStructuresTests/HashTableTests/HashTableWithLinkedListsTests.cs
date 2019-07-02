@@ -17,6 +17,24 @@ namespace DataStructuresTests.HashTableTests
         }
 
         [TestMethod]
+        public void HashTable_Add_AddNullKey_ThrowsArgumentNullException()
+        {
+            try
+            {
+                _ht.Add(null, "one");
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
         public void HashTable_Add_AddToEmptyHashTable_Successful()
         {
             _ht.Add(1, "one");

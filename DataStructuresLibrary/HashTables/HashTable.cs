@@ -21,6 +21,11 @@ namespace DataStructuresLibrary.HashTables
 
         public void Add(TKey key, TValue value)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var linkedList = GetLinkedListByKey(key);
 
             var indexKey = linkedList.FindFirstIndex(tuple => tuple.key.Equals(key));

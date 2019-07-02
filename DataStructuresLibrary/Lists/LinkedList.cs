@@ -221,7 +221,7 @@ namespace DataStructuresLibrary.Lists
             return GetEnumerator();
         }
 
-        public int FindFirstIndex(Func<T, bool> predicate)
+        public int FindFirstIndex(Predicate<T> predicate)
         {
             var curr = _head;
             var index = 0;
