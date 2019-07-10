@@ -5,18 +5,7 @@ namespace DataStructuresLibrary.Stacks
     {
         private readonly int _capacity;
         private int _size;
-
-        class Node<U>{
-            internal U _data;
-            internal Node<U> _next;
-
-            public Node(U data)
-            {
-                _data = data;
-            }
-        }
-
-        Node<T> current;
+        private Node<T> _current;
 
         /// <summary>
         /// Non bounded stack
@@ -25,7 +14,7 @@ namespace DataStructuresLibrary.Stacks
         {
             _capacity = int.MaxValue;
             _size = 0;
-            current = null;
+            _current = null;
         }
 
         /// <summary>
@@ -41,7 +30,7 @@ namespace DataStructuresLibrary.Stacks
 
             _capacity = capacity;
             _size = 0;
-            current = null;
+            _current = null;
         }
 
         public int GetMaxCapacity()
@@ -69,7 +58,8 @@ namespace DataStructuresLibrary.Stacks
             if (IsEmpty()){
                 throw new InvalidOperationException("The stack is empty");
             }
-            return current._data;
+
+            return _current.Data;
         }
 
         public T Pop()
@@ -78,20 +68,25 @@ namespace DataStructuresLibrary.Stacks
             {
                 throw new InvalidOperationException("The stack is empty");
             }
-            T result = current._data;
-            current = current._next;
+
+            var result = _current.Data;
+            _current = _current.Next;
             _size--;
             return result;
         }
 
         public void Push(T newValue)
         {
-            if (IsFull()){
+            if (IsFull())
+            {
                 throw new InvalidOperationException("The stack is full");
             }
-            Node<T> newNode = new Node<T>(newValue);
-            newNode._next = current;
-            current = newNode;
+
+            var newNode = new Node<T>(newValue)
+            {
+                Next = _current
+            };
+            _current = newNode;
             _size++;
         }
     }

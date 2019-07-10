@@ -3,10 +3,10 @@ namespace DataStructuresLibrary.Queues
 {
     public class QueueWithLinkedList<T> : IQueue<T>
     {
-        private int _capacity;
+        private readonly int _capacity;
         private int _size;
-        private Node<T> first;
-        private Node<T> last;
+        private Node<T> _first;
+        private Node<T> _last;
 
         /// <summary>
         /// Non bounded queue
@@ -27,19 +27,9 @@ namespace DataStructuresLibrary.Queues
             {
                 throw new ArgumentOutOfRangeException();
             }
+
             _capacity = capacity;
             _size = 0;
-        }
-
-        class Node<U>
-        {
-            internal U data;
-            internal Node<U> next;
-
-            public Node(U newValue)
-            {
-                data = newValue;
-            }
         }
 
         public int GetCurrentSize()
@@ -68,7 +58,8 @@ namespace DataStructuresLibrary.Queues
             {
                 throw new InvalidOperationException("The queue is empty");
             }
-            return first.data;
+
+            return _first.Data;
         }
 
         public T Dequeue()
@@ -77,12 +68,14 @@ namespace DataStructuresLibrary.Queues
             {
                 throw new InvalidOperationException("The queue is empty");
             }
+
             if (HasOneElement())
             {
-                last = null;
+                _last = null;
             }
-            T result = first.data;
-            first = first.next;
+
+            var result = _first.Data;
+            _first = _first.Next;
             _size--;
             return result;
         }
@@ -93,16 +86,18 @@ namespace DataStructuresLibrary.Queues
             {
                 throw new InvalidOperationException("The queue is full");
             }
+
             if (IsEmpty())
             {
-                last = new Node<T>(newValue);
-                first = last;
+                _last = new Node<T>(newValue);
+                _first = _last;
             }
             else
             {
-                last.next = new Node<T>(newValue);
-                last = last.next;
+                _last.Next = new Node<T>(newValue);
+                _last = _last.Next;
             }
+
             _size++;
         }
 

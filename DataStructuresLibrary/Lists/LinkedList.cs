@@ -21,9 +21,9 @@ namespace DataStructuresLibrary.Lists
             {
                 var temp = new Node<T>(newElement)
                 {
-                    prev = _tail
+                    Prev = _tail
                 };
-                _tail.next = temp;
+                _tail.Next = temp;
                 _tail = temp;
             }
 
@@ -41,9 +41,9 @@ namespace DataStructuresLibrary.Lists
             {
                 var temp = new Node<T>(newElement)
                 {
-                    next = _head
+                    Next = _head
                 };
-                _head.prev = temp;
+                _head.Prev = temp;
                 _head = temp;
             }
 
@@ -60,11 +60,11 @@ namespace DataStructuresLibrary.Lists
             var curr = _head;
             while(curr != null)
             {
-                if (curr.data.Equals(element))
+                if (curr.Data.Equals(element))
                 {
                     return true;
                 }
-                curr = curr.next;
+                curr = curr.Next;
             }
 
             return false;
@@ -80,10 +80,10 @@ namespace DataStructuresLibrary.Lists
             var curr = _head;
             for (var i = 0; i < index; i++)
             {
-                curr = curr.next;
+                curr = curr.Next;
             }
 
-            return curr.data;
+            return curr.Data;
         }
 
         public int GetMaxCapacity()
@@ -102,11 +102,11 @@ namespace DataStructuresLibrary.Lists
 
             while (curr != null)
             {
-                if (curr.data.Equals(element))
+                if (curr.Data.Equals(element))
                 {
                     RemoveNode(curr);
                 }
-                curr = curr.next;
+                curr = curr.Next;
             }
         }
 
@@ -117,25 +117,25 @@ namespace DataStructuresLibrary.Lists
                 return;
             }
 
-            if (node.prev == null && node.next == null)
+            if (node.Prev == null && node.Next == null)
             {
                 _head = null;
                 _tail = null;
             }
-            else if (node.prev == null)
+            else if (node.Prev == null)
             {
-                _head = node.next;
-                node.next.prev = node.prev;
+                _head = node.Next;
+                node.Next.Prev = node.Prev;
             }
-            else if (node.next == null)
+            else if (node.Next == null)
             {
-                _tail = node.prev;
-                node.prev.next = node.next;
+                _tail = node.Prev;
+                node.Prev.Next = node.Next;
             }
             else
             {
-                node.prev.next = node.next;
-                node.next.prev = node.prev;
+                node.Prev.Next = node.Next;
+                node.Next.Prev = node.Prev;
             }
 
             _size--;
@@ -171,7 +171,7 @@ namespace DataStructuresLibrary.Lists
 
             for (var i = _size - 1; i > index; i--)
             {
-                curr = curr.prev;
+                curr = curr.Prev;
             }
 
             RemoveNode(curr);
@@ -183,7 +183,7 @@ namespace DataStructuresLibrary.Lists
 
             for (var i = 0; i < index; i++)
             {
-                curr = curr.next;
+                curr = curr.Next;
             }
 
             RemoveNode(curr);
@@ -195,11 +195,11 @@ namespace DataStructuresLibrary.Lists
             var index = 0;
             while (curr != null)
             {
-                if (curr.data.Equals(element))
+                if (curr.Data.Equals(element))
                 {
                     return index;
                 }
-                curr = curr.next;
+                curr = curr.Next;
                 index++;
             }
 
@@ -211,8 +211,8 @@ namespace DataStructuresLibrary.Lists
             var curr = _head;
             while (curr != null)
             {
-                yield return curr.data;
-                curr = curr.next;
+                yield return curr.Data;
+                curr = curr.Next;
             }
         }
 
@@ -227,11 +227,11 @@ namespace DataStructuresLibrary.Lists
             var index = 0;
             while (curr != null)
             {
-                if (predicate(curr.data))
+                if (predicate(curr.Data))
                 {
                     return index;
                 }
-                curr = curr.next;
+                curr = curr.Next;
                 index++;
             }
 

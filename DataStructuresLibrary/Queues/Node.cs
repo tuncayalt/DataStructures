@@ -1,14 +1,13 @@
-﻿namespace DataStructuresLibrary.Lists
+﻿namespace DataStructuresLibrary.Queues
 {
     internal class Node<T>
     {
         internal T Data { get; set; }
         internal Node<T> Next { get; set; }
-        internal Node<T> Prev { get; set; }
 
-        internal Node(T newItem)
+        internal Node(T newValue)
         {
-            Data = newItem;
+            Data = newValue;
         }
     }
 }
