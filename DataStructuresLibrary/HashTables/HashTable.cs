@@ -5,8 +5,8 @@ namespace DataStructuresLibrary.HashTables
 {
     public class HashTable<TKey, TValue> : IHashTable<TKey, TValue>
     {
-        private Lists.IList<(TKey key, TValue value)>[] _table;
         private const int DefaultSize = 16;
+        private Lists.IList<(TKey key, TValue value)>[] _table;
         private readonly int _tableSize;
 
         public HashTable(int tableSize)
@@ -47,6 +47,7 @@ namespace DataStructuresLibrary.HashTables
                 linkedList = new Lists.LinkedList<(TKey key, TValue value)>();
                 _table[index] = linkedList;
             }
+
             return linkedList;
         }
 
@@ -61,12 +62,14 @@ namespace DataStructuresLibrary.HashTables
             {
                 throw new ArgumentNullException(nameof(key));
             }
+
             var linkedList = GetLinkedListByKey(key);
             var index = linkedList.FindFirstIndex(tuple => tuple.key.Equals(key));
             if (index >= 0)
             {
                 return true;
             }
+
             return false;
         }
 
