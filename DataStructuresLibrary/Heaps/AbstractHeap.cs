@@ -87,9 +87,9 @@ namespace DataStructuresLibrary.Heaps
 
         private void SiftDown() => SiftDown(SiftDownComparator);
 
-        protected abstract bool SiftDownComparator(int value);
+        protected abstract bool SiftDownComparator(T value1, T value2);
 
-        private void SiftDown(Func<int, bool> comparator)
+        private void SiftDown(Func<T, T, bool> comparator)
         {
             var curr = 0;
 
@@ -103,9 +103,9 @@ namespace DataStructuresLibrary.Heaps
                     return;
                 }
 
-                var child = right >= Count || comparator(_arr[left].CompareTo(_arr[right])) ? left : right;
+                var child = right >= Count || comparator(_arr[left], _arr[right]) ? left : right;
 
-                if (child >= Count || comparator(_arr[curr].CompareTo(_arr[child])))
+                if (child >= Count || comparator(_arr[curr], _arr[child]))
                 {
                     return;
                 }
@@ -117,16 +117,16 @@ namespace DataStructuresLibrary.Heaps
 
         private void SiftUp() => SiftUp(SiftUpComparator);
 
-        protected abstract bool SiftUpComparator(int value);
+        protected abstract bool SiftUpComparator(T value1, T value2);
 
-        private void SiftUp(Func<int, bool> comparator)
+        private void SiftUp(Func<T, T, bool> comparator)
         {
             var curr = Count - 1;
 
             while (curr > 0)
             {
                 var parent = GetParentIndex(curr);
-                if (parent >= 0 && comparator(_arr[curr].CompareTo(_arr[parent])))
+                if (parent >= 0 && comparator(_arr[curr], _arr[parent]))
                 {
                     _arr.Swap(curr, parent);
                 }
