@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using DataStructuresLibrary.Common;
 
 namespace DataStructuresLibrary.Heaps
@@ -135,16 +136,19 @@ namespace DataStructuresLibrary.Heaps
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private int GetParentIndex(int index)
         {
             return (index - 1) / 2;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private int GetRightIndex(int index)
         {
             return (index + 1) * 2;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private int GetLeftIndex(int index)
         {
             return index * 2 + 1;
