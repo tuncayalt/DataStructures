@@ -16,3 +16,7 @@ My implementations of various generic data structures. I am implementing them wi
 
 4. HashTable implementations
 - HashTable with array and linked list
+
+5. Heap implementations
+- MinHeap with array
+- MaxHeap with array
