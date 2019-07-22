@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructuresLibrary.Heaps
+namespace DataStructuresLibrary.Trees.Heaps
 {
     public class MaxHeap<T> : AbstractHeap<T> where T : IComparable
     {

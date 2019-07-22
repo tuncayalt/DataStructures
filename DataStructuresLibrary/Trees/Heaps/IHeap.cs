@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructuresLibrary.Heaps
+namespace DataStructuresLibrary.Trees.Heaps
 {
     public interface IHeap<T> where T : IComparable
     {

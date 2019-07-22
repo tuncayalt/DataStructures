@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using DataStructuresLibrary.Common;
 
-namespace DataStructuresLibrary.Heaps
+namespace DataStructuresLibrary.Trees.Heaps
 {
     public abstract class AbstractHeap<T> : IHeap<T> where T : IComparable
     {

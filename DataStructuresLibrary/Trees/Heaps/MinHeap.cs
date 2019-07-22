@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructuresLibrary.Heaps
+namespace DataStructuresLibrary.Trees.Heaps
 {
     public class MinHeap<T> : AbstractHeap<T> where T : IComparable
     {

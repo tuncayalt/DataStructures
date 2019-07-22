@@ -1,7 +1,7 @@
-﻿using DataStructuresLibrary.Heaps;
+﻿using DataStructuresLibrary.Trees.Heaps;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DataStructuresTests.HeapTests
+namespace DataStructuresTests.TreeTests.HeapTests
 {
     [TestClass]
     public class MaxHeapTest
